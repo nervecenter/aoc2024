@@ -23,7 +23,7 @@
 
 (def left-freqs (frequencies sorted-left))
 (def right-freqs (frequencies sorted-right))
-(pp left-freqs)
+
 (var similarity 0)
 (eachk num left-freqs
   (if (has-key? right-freqs num)
