@@ -1,5 +1,7 @@
 # https://adventofcode.com/2024/day/1
 
+# Part 1
+
 (def lines (->> (slurp "day1_input.txt") (string/split "\n")))
 
 (defn splitlines [lines-array left-list right-list]
@@ -15,3 +17,17 @@
 (def total (sum distances))
 
 (pp total) # 2367773
+
+
+# Part 2
+
+(def left-freqs (frequencies sorted-left))
+(def right-freqs (frequencies sorted-right))
+(pp left-freqs)
+(var similarity 0)
+(eachk num left-freqs
+  (if (has-key? right-freqs num)
+    (+= similarity (* num (right-freqs num)))))
+
+(pp similarity) # 21271939
+
