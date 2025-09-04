@@ -21,6 +21,7 @@ proc split_lines_and_sort(lines_array: seq[string]): (seq[int], seq[int]) =
 
 let (left_list, right_list) = split_lines_and_sort(lines)
 let total_distance = zip(left_list, right_list).map((l_r) => abs(l_r[0] - l_r[1])).sum()
+
 echo total_distance # 2367773
 
 
