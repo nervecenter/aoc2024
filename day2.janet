@@ -46,7 +46,7 @@
 (def dampened-checks
   (seq [i :range [0 (length safe-checks)]]
     (or
-      (safe-checks i)
+      (safe-checks i) # If it's already safe, do nothing
       (try-dampen (reports i) 0))))
 
 (def dampened-total-safe (count true? dampened-checks))
