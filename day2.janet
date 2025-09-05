@@ -32,7 +32,7 @@
 
 
 # Part 2
-# 
+
 (defn tuple/remove [tup idx]
   (tuple/join (tuple/slice tup 0 idx)
               (tuple/slice tup (inc idx))))
