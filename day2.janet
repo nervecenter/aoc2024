@@ -17,13 +17,13 @@
 
 (def diffs (map level-diffs reports))
 
-(defn safe? [arr]
+(defn safe? [diffs]
   (and
-    (or (all pos? arr)
-        (all neg? arr))
+    (or (all pos? diffs)
+        (all neg? diffs))
     (all (fn [d]
            (and (>= (math/abs d) 1)
-                (<= (math/abs d) 3))) arr)))
+                (<= (math/abs d) 3))) diffs)))
 
 (def safe-checks (map safe? diffs))
 (def total-safe (count true? safe-checks))
@@ -33,5 +33,18 @@
 
 # Part 2
 
-# (defn safe-diff? [a b]
-#   )
+(defn try-dampen [report idx]
+  (cond
+    (= idx (length report)) false
+    (safe? (level-diffs (array/remove report idx))) true
+    (try-dampen report (inc idx))))
+
+(def dampened-checks
+  (seq [i :range [0 (length safe-checks)]]
+    (or
+      (safe-checks i)
+      (try-dampen (reports i) 0))))
+
+(def dampened-total-safe (count true? dampened-checks))
+
+(pp dampened-total-safe)
