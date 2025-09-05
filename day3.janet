@@ -13,9 +13,9 @@
     (map scan-number (peg/match mul-instructions corrupted-memory idx))))
 
 (def mul-results (map product operands-seq))
-(def final-result (sum mul-results))
+(def final-sum-1 (sum mul-results))
 
-(pp final-result) # 170068701
+(pp final-sum-1) # 170068701
 
 # Part 2
 
@@ -31,7 +31,7 @@
     (peg/match all-ops corrupted-memory idx)))
 
 (defn perform-mul [operands]
-  (product (map (fn [o] (scan-number o)) operands)))
+  (product (map scan-number operands)))
 
 (defn process-ops [sequence idx mode acc]
   (cond
@@ -42,7 +42,7 @@
     (= mode :do)                        (process-ops sequence (inc idx) :do (array/push acc (perform-mul (sequence idx))))))
 
 (def mul-results-2 (process-ops all-ops-seq 0 :do @[]))
-(def processed-sum-2 (sum mul-results-2))
+(def final-sum-2 (sum mul-results-2))
 
-(pp processed-sum-2) # 78683433
+(pp final-sum-2) # 78683433
 
