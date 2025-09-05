@@ -32,11 +32,15 @@
 
 
 # Part 2
+# 
+(defn tuple/remove [tup idx]
+  (tuple/join (tuple/slice tup 0 idx)
+              (tuple/slice tup (inc idx))))
 
 (defn try-dampen [report idx]
   (cond
     (= idx (length report)) false
-    (safe? (level-diffs (array/remove report idx))) true
+    (safe? (level-diffs (tuple/remove report idx))) true
     (try-dampen report (inc idx))))
 
 (def dampened-checks
